@@ -1,0 +1,6 @@
+package finalproject
+
+class EventAccumulator() {
+
+
+}
