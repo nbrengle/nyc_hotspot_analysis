@@ -34,21 +34,20 @@ object Main {
         */
         //assumes values are 1, which they are because we use numPassenger=1 above
         val hist = coords.reduceByKey( _ + _ )
-        for (h <- hist) print(h)
         /*
         3. Compute statistics such as the average and standard deviation of
         the number of events in each cell using the previous RDD.
         */
         // mean is the total value of V / count of K
-        // val cnt = hist.count()
-        // val tot = hist.reduce(_._2+_._2)
-        // val mean = tot / cnt
+        val cnt = hist.count()
+        val tot = hist.map(_._2).reduce((x, y) => x + y)
+        val mean = tot / cnt
         // standardDeviation
             //Then for each number: subtract the Mean and square the result.
             //Then work out the mean of those squared differences.
             //Take the square root of that and we are done!
             //consider rolling this into a real, testable class...
-        // val s_dev = sqrt(hist.reduce(_+ pow((_._2 - mean),2) ) / cnt)
+        val s_dev = sqrt(hist.map(_._2.toDouble).reduce((x,y) => x + pow((y - mean),2)) / cnt)
         /*
         4. Create a new RDD by generating 27 versions of each
         cell i = ((t, x, y), count), each with the same count,
