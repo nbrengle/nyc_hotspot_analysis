@@ -1,1 +1,4 @@
 target/
+*.log
+metastore_db
+yellow_tripdata_2015-01.csv
