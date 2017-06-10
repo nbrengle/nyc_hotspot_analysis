@@ -43,7 +43,9 @@ class LineParser(precision: Double = 0.1, timestep: Int = 3) extends java.io.Ser
         val lat = parseLat(lat_in, precision)
         val lon = parseLong(lon_in, precision)
 
-        return new SpaceTimeCoordinate(lat,lon,date)
+        val coord = lat + "," + lon + "," + date
+
+        return CoordFactory.getCoord(coord)
     }
 
     def parseLat(lat: Double, precision: Double): Int = {

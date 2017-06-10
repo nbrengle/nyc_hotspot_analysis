@@ -24,7 +24,9 @@ object Main {
         //val cab_data = sparkContext.textFile("hdfs://...")
         val cab_data = sparkContext.textFile("/Users/nathaniel/Workspaces/class/CSC543/final_project/csc543_final/yellow_tripdata_2015-01.csv")
 
+        //Question: How do I switch to mapPartitions
         val coords = cab_data.flatMap(line => lineParser.parseLine(line.split(",")))
+
         /*
         2. Perform a reduction by key operation to create a RDD counts.
         In this RDD, for each key (coordinates (t, x, y)) the value will be
