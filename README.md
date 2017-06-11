@@ -3,6 +3,14 @@ CSC543 Final Project, re-implement(ish) SVG Magalhaes and WR Franklin's solution
 
 To use this app you'll need to install sbt, scala 2.11 and spark 2.1.1
 
+You will have to change the following values to appropriate values for your run in `Main.scala`. Future versions will take commandline arguments:
+
+```
+val DEGREES_PRECISION = .01
+val TIMESTEP_SIZE = 3
+val FILE = "/Absolute/Path/To/A/CSV/File/"
+```
+
 To run it, navigate to the top directory of the project: 
 ```
 sbt package
