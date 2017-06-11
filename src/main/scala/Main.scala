@@ -69,6 +69,9 @@ object Main {
         to the output.
         */
         //instead we'll loop through just pulling out the 50 highest values
+        val top50 = sumNeigh.takeOrdered(50)(Ordering.by[(SpaceTimeCoordinate, Int), Int](_._2).reverse)
+        
+
 
         sparkContext.stop()
     }
