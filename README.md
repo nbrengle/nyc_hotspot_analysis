@@ -5,17 +5,17 @@ To use this app you'll need to install sbt, scala 2.11 and spark 2.1.1
 
 You will have to change the following values to appropriate values for your run in `Main.scala`. Future versions will take commandline arguments:
 
-```
+```scala
 val DEGREES_PRECISION = .01
 val TIMESTEP_SIZE = 3
 val FILE = "/Absolute/Path/To/A/CSV/File/"
 ```
 
 To run it, navigate to the top directory of the project: 
-```
+```bash
 sbt package
 ```
 Then:
-```
+```bash
 spark-submit target/scala-2.11/main_2.11-0.1.0.jar
 ```
