@@ -10,9 +10,9 @@ import finalproject.Ballooner
 import scala.math.pow
 import scala.math.sqrt
 
+
 object Main {
     def main(args: Array[String]) {
-
         //initialize Spark
         val conf = new SparkConf().setAppName("finalproject").setMaster("local")
         val sparkContext = new SparkContext(conf)
@@ -68,10 +68,22 @@ object Main {
         each cell in the RDD sumNeigh and write the cells with highest scores
         to the output.
         */
-        //instead we'll loop through just pulling out the 50 highest values
+        //instead we'll sort it and take the top 50 values
+        //looping through to take 50 values is actually slower
+        //Possible optimizations here to do better than nlogn
         val top50 = sumNeigh.takeOrdered(50)(Ordering.by[(SpaceTimeCoordinate, Int), Int](_._2).reverse)
-        
-
+        //calc GO
+            // sum (weights * values) - mean(sum of the weights)
+            //divided by s_dev * sqrt(((count * sum of weights^2) - (sum of the weights)^2)/n-1)
+            // (_.2 - mean * 27) / s_dev * sqrt (((cnt * 27) - 27^2)/(cnt-1))
+        val g_star_denom = s_dev * sqrt(((cnt * 27) - pow(27,2))/(cnt-1))
+        val g_star_sub = mean * 27
+        val topGO = sparkContext.parallelize(top50).mapValues(x => (x - g_star_sub)/g_star_denom)
+        for (GO <- topGO) print (GO)
+        //
+        // val G_neighs = sumNeigh.mapValues(x => (x - g_star_sub)/g_star_denom)
+        // val g_fiddy = G_neighs.takeOrdered(50)(Ordering.by[(SpaceTimeCoordinate, Double), Double](_._2).reverse)
+        // for (g <- g_fiddy) print (g)
 
         sparkContext.stop()
     }
