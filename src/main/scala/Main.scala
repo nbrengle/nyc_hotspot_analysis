@@ -5,6 +5,8 @@ import org.apache.spark.SparkContext
 import org.apache.spark.SparkConf
 import finalproject.LineParser
 import finalproject.SpaceTimeCoordinate
+import finalproject.CoordFactory
+import finalproject.Ballooner
 import scala.math.pow
 import scala.math.sqrt
 
@@ -54,8 +56,8 @@ object Main {
         but the following various coordinates
         ((t + dt, x + dx, y + dy), count), for dt = −1..1, dx = −1..1, dy = −1..1.
         */
-        val neighs = hist
-        /*
+        val neighs = hist.flatMap(point => Ballooner.balloon(point._1,point._2))
+        /*for
         5. Reduce this new RDD by key, creating an RDD sumNeigh that will
         contain, for each cell i, σi, the sum of the number of events in the
         neighbors of i.
