@@ -13,6 +13,11 @@ import scala.math.sqrt
 
 object Main {
     def main(args: Array[String]) {
+        //Configure the run
+        val DEGREES_PRECISION = .01
+        val TIMESTEP_SIZE = 3
+        val FILE = "/Absolute/Path/To/A/CSV/File/"
+
         //initialize Spark
         val conf = new SparkConf().setAppName("finalproject").setMaster("local")
         val sparkContext = new SparkContext(conf)
@@ -22,9 +27,9 @@ object Main {
         as value. (t, x, y) represents the cell coordinates of the drop- off
         and numPassenger is the number of passengers dropped off at that event.
         */
-        val lineParser = new LineParser()
+        val lineParser = new LineParser(DEGREES_PRECISION,TIMESTEP_SIZE)
         //val cab_data = sparkContext.textFile("hdfs://...")
-        val cab_data = sparkContext.textFile("/Users/nathaniel/Workspaces/class/CSC543/final_project/csc543_final/yellow_tripdata_2015-01.csv")
+        val cab_data = sparkContext.textFile(FILE)
 
         //Question: How do I switch to mapPartitions
         val coords = cab_data.flatMap(line => lineParser.parseLine(line.split(",")))
