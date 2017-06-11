@@ -16,7 +16,7 @@ object Main {
         //Configure the run
         val DEGREES_PRECISION = .01
         val TIMESTEP_SIZE = 3
-        val FILE = "/Users/nathaniel/Downloads/yellowcabdata/*.csv"
+        val FILE = "/Absolute/Path/To/A/CSV/File/or/Files/*.csv"
         val MAKRAI_OPT = false
 
         //initialize Spark
