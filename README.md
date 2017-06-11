@@ -1,5 +1,5 @@
 # nyc_hotspot_analysis
-CSC543 Final Project, re-implement(ish) Makrai's solution to ACM-Sig Spatial Cup for Spatio-Temporal Analysis of New York City Yellow Cab Data for 2015
+CSC543 Final Project, re-implement(ish) SVG Magalhaes and WR Franklin's solution to ACM-Sig Spatial Cup for Spatio-Temporal Analysis of New York City Yellow Cab Data for 2015
 
 To use this app you'll need to install sbt, scala and spark
 
