@@ -31,12 +31,21 @@ class LineParser(precision: Double = 0.1, timestep: Int = 3) extends java.io.Ser
         val date = try {
             parseDate(line(DATE_COL).toString, timestep)
         } catch {
-            case ioe: DateTimeParseException => -1
+            case dtpe: DateTimeParseException => -1
         }
 
-        val lat_in = line(LAT_COL).toDouble
-        val lon_in = line(LONG_COL).toDouble
-        if (date == -1 || lat_in == 0.0 || lon_in == 0.0) {
+        val lat_in = try {
+            line(LAT_COL).toDouble
+        } catch {
+            case nmfe: java.lang.NumberFormatException => -1
+        }
+        val lon_in = try {
+            line(LONG_COL).toDouble
+        } catch {
+            case nmfe: java.lang.NumberFormatException => -1
+        }
+
+        if (date == -1 || lat_in == -1 || lon_in == -1) {
             Unit
         }
 
